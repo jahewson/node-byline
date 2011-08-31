@@ -14,7 +14,7 @@
 or from source:
 
     git clone git://github.com/jahewson/node-byline.git
-	cd request
+	cd byline
 	npm link
 
 #Example
