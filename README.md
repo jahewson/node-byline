@@ -7,6 +7,16 @@
 - wraps any readable stream
 - super-simple: `stream = byline.createLineStream(stream);`
 
+## Install
+
+    npm install byline
+
+or from source:
+
+    git clone git://github.com/jahewson/node-byline.git
+	cd request
+	npm link
+
 #Example
     
 You just need to add one line to wrap your readable `Stream` with a `LineStream`. The stream must have a non-null encoding.
