@@ -1,11 +1,12 @@
 # byline -- buffered Stream for reading lines
 
-`byline` is an insanely simple module providing a `LineStream` for [node.js](http://nodejs.org/).
+`byline` is a super-simple module providing a `LineStream` for [node.js](http://nodejs.org/).
 
 - supports `pipe`
 - supports both UNIX and Windows line endings
-- wraps any readable stream
-- super-simple: `stream = byline.createLineStream(stream);`
+- can wrap any encoded readable stream
+- can be used as a readable-writable "through-stream"
+- super-simple: `stream = byline(stream);`
 
 ## Install
 
@@ -17,36 +18,60 @@ or from source:
 	cd node-byline
 	npm link
 
-#Example
+#Convenience API
+
+The `byline` module can be used as a function to quickly wrap a readable stream:
+
+    var stream = byline(fs.createReadStream('sample.txt'));
+              
+The `data` event then emits lines:
+
+    stream.on('data', function(line) {
+      console.log(line);
+    });
+
+#Standard API
     
-You just need to add one line to wrap your readable `Stream` with a `LineStream`. The stream must have a non-null encoding.
+You just need to add one line to wrap your readable `Stream` with a `LineStream`.
 
     var fs = require('fs'),	
         byline = require('byline');
 
-	var stream = fs.createReadStream('sample.txt', {encoding:'utf8'});
-	
-	// this is the only line you need to add:
-	stream = byline.createLineStream(stream);
+	var stream = fs.createReadStream('sample.txt');
+	stream = byline.createStream(stream);
 
 	stream.on('data', function(line) {
 	  console.log(line);
 	});
 
-#Pipe
+#Piping
 
-`byline` plays nice with `pipe`, but don't forget it strips the line endings.
+`byline` supports `pipe` (though it strips the line endings, of course).
 
-    var stream = fs.createReadStream('sample.txt', {encoding:'utf8'});
+    var stream = fs.createReadStream('sample.txt');
 	stream = byline.createLineStream(stream);
 	stream.pipe(fs.createWriteStream('nolines.txt'));
+	
+Alternatively, you can create a readable/writable "through-stream" which doesn't wrap any specific stream:
 
-#Awesome
-Unlike other modules (of which there are many), `byline` contains absolutely no:
+    var stream = fs.createReadStream('sample.txt');
+	stream = byline.createLineStream(stream);
+	stream.pipe(fs.createWriteStream('nolines.txt'));
+	
+    var input = fs.createReadStream('LICENSE');
+    var lineStream = byline.createStream();
+    input.pipe(lineStream);
 
-- X - monkeypatching
-- X - dependencies
-- X - non-standard 'line' events which break `pipe`
-- X - limitations to only file streams
-- X - CoffeeScript (sorry)
-- X -  mostly unnecessary code
+    var output = fs.createWriteStream('test.txt');
+    lineStream.pipe(output);
+
+
+#Simple
+Unlike other modules (of which there are many), `byline` contains no:
+
+- monkeypatching
+- dependencies
+- non-standard 'line' events which break `pipe`
+- limitations to only file streams
+- CoffeeScript
+- mostly unnecessary code
