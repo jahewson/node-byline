@@ -4,7 +4,7 @@
 
 - supports `pipe`
 - supports both UNIX and Windows line endings
-- can wrap any encoded readable stream
+- can wrap any readable stream
 - can be used as a readable-writable "through-stream"
 - super-simple: `stream = byline(stream);`
 
