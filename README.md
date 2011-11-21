@@ -22,6 +22,9 @@ or from source:
 
 The `byline` module can be used as a function to quickly wrap a readable stream:
 
+    var fs = require('fs),
+        byline = require('byline');
+    
     var stream = byline(fs.createReadStream('sample.txt'));
               
 The `data` event then emits lines:
