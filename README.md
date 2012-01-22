@@ -22,52 +22,61 @@ or from source:
 
 The `byline` module can be used as a function to quickly wrap a readable stream:
 
-    var fs = require('fs),
-        byline = require('byline');
-    
-    var stream = byline(fs.createReadStream('sample.txt'));
-              
+```javascript
+var fs = require('fs'),
+    byline = require('byline');
+
+var stream = byline(fs.createReadStream('sample.txt'));
+```
+
 The `data` event then emits lines:
 
-    stream.on('data', function(line) {
-      console.log(line);
-    });
+```javascript
+stream.on('data', function(line) {
+  console.log(line);
+});
+```
 
 #Standard API
     
 You just need to add one line to wrap your readable `Stream` with a `LineStream`.
 
-    var fs = require('fs'),	
-        byline = require('byline');
+```javascript
+var fs = require('fs'),	
+    byline = require('byline');
 
-	var stream = fs.createReadStream('sample.txt');
-	stream = byline.createStream(stream);
+var stream = fs.createReadStream('sample.txt');
+stream = byline.createStream(stream);
 
-	stream.on('data', function(line) {
-	  console.log(line);
-	});
+stream.on('data', function(line) {
+  console.log(line);
+});
+```
 
 #Piping
 
 `byline` supports `pipe` (though it strips the line endings, of course).
 
-    var stream = fs.createReadStream('sample.txt');
-	stream = byline.createLineStream(stream);
-	stream.pipe(fs.createWriteStream('nolines.txt'));
-	
+```javascript
+var stream = fs.createReadStream('sample.txt');
+stream = byline.createLineStream(stream);
+stream.pipe(fs.createWriteStream('nolines.txt'));
+```
+
 Alternatively, you can create a readable/writable "through-stream" which doesn't wrap any specific stream:
 
-    var stream = fs.createReadStream('sample.txt');
-	stream = byline.createLineStream(stream);
-	stream.pipe(fs.createWriteStream('nolines.txt'));
+```javascript
+var stream = fs.createReadStream('sample.txt');
+stream = byline.createLineStream(stream);
+stream.pipe(fs.createWriteStream('nolines.txt'));
 	
-    var input = fs.createReadStream('LICENSE');
-    var lineStream = byline.createStream();
-    input.pipe(lineStream);
+var input = fs.createReadStream('LICENSE');
+var lineStream = byline.createStream();
+input.pipe(lineStream);
 
-    var output = fs.createWriteStream('test.txt');
-    lineStream.pipe(output);
-
+var output = fs.createWriteStream('test.txt');
+lineStream.pipe(output);
+```
 
 #Simple
 Unlike other modules (of which there are many), `byline` contains no:
