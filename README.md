@@ -78,6 +78,20 @@ var output = fs.createWriteStream('test.txt');
 lineStream.pipe(output);
 ```
 
+#Pausing
+
+A stream can be paused in order to do asynchronous processing.
+
+```javascript
+var stream = byline(fs.createReadStream('sample.txt'));
+stream.on('data', function (line) {
+  stream.pause();
+  doSomethingAsync(function (err) {
+    stream.resume();
+  });
+});
+```
+
 #Simple
 Unlike other modules (of which there are many), `byline` contains no:
 
