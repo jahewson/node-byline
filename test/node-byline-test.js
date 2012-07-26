@@ -9,3 +9,5 @@ var lineStream = byline(input); // convinience API
 
 var output = fs.createWriteStream('test.txt');
 lineStream.pipe(output);
+lineStream.pause();
+lineStream.resume();

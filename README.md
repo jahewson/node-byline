@@ -55,7 +55,8 @@ stream.on('data', function(line) {
 
 #Piping
 
-`byline` supports `pipe` (though it strips the line endings, of course).
+`byline` supports `pipe` (though it strips the line endings, of course). When piping into a stream, the `pause()` and `resume()` 
+methods are supported by the `LineStream`, and pass on the call to the original stream.
 
 ```javascript
 var stream = fs.createReadStream('sample.txt');
