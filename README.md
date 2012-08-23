@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/jahewson/node-byline.png)](http://travis-ci.org/jahewson/node-byline)
 # byline -- buffered Stream for reading lines
 
 `byline` is a super-simple module providing a `LineStream` for [node.js](http://nodejs.org/).
