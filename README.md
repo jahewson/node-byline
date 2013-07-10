@@ -38,6 +38,14 @@ stream.on('data', function(line) {
 });
 ```
 
+Or, if you're using streams2:
+
+```javascript
+stream.ondata = function(line) {
+  console.log(line);
+});
+```
+
 #Standard API
     
 You just need to add one line to wrap your readable `Stream` with a `LineStream`.
@@ -48,8 +56,18 @@ var fs = require('fs'),
 
 var stream = fs.createReadStream('sample.txt');
 stream = byline.createStream(stream);
+```
 
+```javascript
 stream.on('data', function(line) {
+  console.log(line);
+});
+```
+
+Or, if you're using streams2:
+
+```javascript
+stream.ondata = function(line) {
   console.log(line);
 });
 ```
