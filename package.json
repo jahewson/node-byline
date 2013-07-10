@@ -3,12 +3,12 @@
   "description": "super-simple line-by-line Stream reader",
 	"homepage" : "https://github.com/jahewson/node-byline",
 	"bugs" : { "url" : "https://github.com/jahewson/node-byline/issues" },
-  "version": "2.1.1",
+  "version": "3.0.0",
   "author": "John Hewson",
   "repository": {
     "type": "git",
     "url": "https://github.com/jahewson/node-byline"
   },
-  "engines": { "node": ">=0.4.0 <0.10.0" },
+  "engines": { "node": ">=0.10.0" },
   "main" : "./lib"
 }
