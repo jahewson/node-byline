@@ -2,10 +2,11 @@
 
 `byline` is a super-simple module providing a `LineStream` for [node.js](http://nodejs.org/).
 
+- node v0.10 "streams2" (transform stream)
 - supports `pipe`
 - supports both UNIX and Windows line endings
 - can wrap any readable stream
-- can be used as a readable-writable "through-stream"
+- can be used as a readable-writable "through-stream" (transform stream)
 - super-simple: `stream = byline(stream);`
 
 ## Install
@@ -55,8 +56,7 @@ stream.on('data', function(line) {
 
 #Piping
 
-`byline` supports `pipe` (though it strips the line endings, of course). When piping into a stream, the `pause()` and `resume()` 
-methods are supported by the `LineStream`, and pass on the call to the original stream.
+`byline` supports `pipe` (though it strips the line endings, of course).
 
 ```javascript
 var stream = fs.createReadStream('sample.txt');
@@ -77,6 +77,22 @@ input.pipe(lineStream);
 
 var output = fs.createWriteStream('test.txt');
 lineStream.pipe(output);
+```
+
+#Transform Stream
+
+The `byline` transform stream can be directly manipulated like so:
+
+```javascript
+var LineStream = require('byline').LineStream;
+
+var input = fs.createReadStream('sample.txt');
+var output = fs.createWriteStream('nolines.txt');
+
+var lineStream = new LineStream();
+input.pipe(lineStream);
+lineStream.pipe(output);
+
 ```
 
 #Simple
