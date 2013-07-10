@@ -2,7 +2,7 @@
 
 `byline` is a super-simple module providing a `LineStream` for [node.js](http://nodejs.org/).
 
-- node v0.10 "streams2" (transform stream)
+- node v0.10 `streams2` (transform stream)
 - supports `pipe`
 - supports both UNIX and Windows line endings
 - can wrap any readable stream
@@ -38,7 +38,7 @@ stream.on('data', function(line) {
 });
 ```
 
-Or, if you're using streams2:
+Or, if you're using `streams2`:
 
 ```javascript
 stream.ondata = function(line) {
@@ -56,15 +56,13 @@ var fs = require('fs'),
 
 var stream = fs.createReadStream('sample.txt');
 stream = byline.createStream(stream);
-```
 
-```javascript
 stream.on('data', function(line) {
   console.log(line);
 });
 ```
 
-Or, if you're using streams2:
+Or, if you're using `streams2`:
 
 ```javascript
 stream.ondata = function(line) {
