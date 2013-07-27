@@ -38,14 +38,6 @@ stream.on('data', function(line) {
 });
 ```
 
-Or, if you're using `streams2`:
-
-```javascript
-stream.ondata = function(line) {
-  console.log(line);
-});
-```
-
 #Standard API
     
 You just need to add one line to wrap your readable `Stream` with a `LineStream`.
@@ -58,14 +50,6 @@ var stream = fs.createReadStream('sample.txt');
 stream = byline.createStream(stream);
 
 stream.on('data', function(line) {
-  console.log(line);
-});
-```
-
-Or, if you're using `streams2`:
-
-```javascript
-stream.ondata = function(line) {
   console.log(line);
 });
 ```
@@ -110,6 +94,10 @@ input.pipe(lineStream);
 lineStream.pipe(output);
 
 ```
+
+#Tests
+
+    mocha -R spec
 
 #Simple
 Unlike other modules (of which there are many), `byline` contains no:
