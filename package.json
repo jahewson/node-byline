@@ -5,6 +5,7 @@
 	"bugs" : { "url" : "https://github.com/jahewson/node-byline/issues" },
   "version": "3.0.1",
   "author": "John Hewson",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/jahewson/node-byline"
