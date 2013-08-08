@@ -73,4 +73,39 @@ describe('byline', function() {
     });
   });
   
+  it('should pause() and resume()', function(done) {
+    var input = fs.createReadStream('LICENSE');
+    var lineStream = byline(input);
+    lineStream.setEncoding('utf8');
+
+    var lines2 = fs.readFileSync('LICENSE', 'utf8').split(/\r\n|\r|\n/g);
+    lines2 = lines2.filter(function(line) {
+      return line.length > 0;
+    });
+    
+    var lines1 = [];
+    var i = 0;
+    lineStream.on('data', function(line) {
+      lines1.push(line);
+      if (line != lines2[i]) {
+        console.log('EXPECTED:', lines2[i]);
+        console.log('     GOT:', line);
+        assert.fail(null, null, 'difference at line ' + (i + 1));
+      }
+      i++;
+      
+      // pause/resume
+      lineStream.pause();
+      setTimeout(function() {
+        lineStream.resume();
+      }, 0);
+    });
+    
+    lineStream.on('end', function() {
+      assert.equal(lines2.length, lines1.length);
+      assert.deepEqual(lines2, lines1);
+      done();
+    });
+  });
+  
 });
