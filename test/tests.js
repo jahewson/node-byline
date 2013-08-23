@@ -43,6 +43,24 @@ describe('byline', function() {
       done();
     });
   });
+
+  it('should do not ignore empty lines', function(done) {
+    var input = fs.createReadStream('test/empty.txt');
+    var lineStream = byline(fs.createReadStream('test/empty.txt'), {
+        skipEmptyLines: false,
+        encoding: 'utf8'
+    });
+    
+    var lines1 = [];
+    lineStream.on('data', function(line) {
+      lines1.push(line);
+    });    
+    lineStream.on('end', function() {
+      var lines2 = fs.readFileSync('test/empty.txt', 'utf8').split(/\r\n|\r|\n/g);
+      assert.deepEqual(lines2, lines1);
+      done();
+    });
+  });
     
    it('should read a large file', function(done) {
     var input = fs.createReadStream('test/rfc.txt');
