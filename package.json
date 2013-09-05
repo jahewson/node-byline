@@ -13,7 +13,10 @@
     "url": "https://github.com/jahewson/node-byline"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.8.0"
   },
-  "main": "./lib"
+  "main": "./lib",
+  "dependencies": {
+    "readable-stream": "~1.1.8"
+  }
 }
