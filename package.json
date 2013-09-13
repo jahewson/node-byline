@@ -17,6 +17,6 @@
   },
   "main": "./lib",
   "dependencies": {
-    "readable-stream": "1.1.7"
+    "readable-stream": "~1.1.9"
   }
 }
