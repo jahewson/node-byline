@@ -99,6 +99,16 @@ lineStream.pipe(output);
 
     mocha -R spec
 
+#v0.8
+
+If you want to use `node-byline` with node v0.8 then you can use the 2.1.x series. Simply use the following in your `package.json`:
+
+```javascript
+  "dependencies": {
+  "byline": ">=2.1.0 <3.0.0"
+},
+```
+
 #Simple
 Unlike other modules (of which there are many), `byline` contains no:
 
