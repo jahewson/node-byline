@@ -24,7 +24,7 @@ describe('byline', function() {
     });
   });
   
-  it('should ignore empty lines', function(done) {
+  it('should ignore empty lines by default', function(done) {
     var input = fs.createReadStream('test/empty.txt');
     var lineStream = byline(input);
     lineStream.setEncoding('utf8');
@@ -40,6 +40,22 @@ describe('byline', function() {
         return line.length > 0;
       });
       assert.deepEqual(lines2, lines1);
+      done();
+    });
+  });
+
+  it('should keep empty lines when keepEmptyLines is true', function(done) {
+    var input = fs.createReadStream('test/empty.txt');
+    var lineStream = byline(input, { keepEmptyLines: true });
+    lineStream.setEncoding('utf8');
+    
+    var lines = [];
+    lineStream.on('data', function(line) {
+      lines.push(line);
+    });
+    
+    lineStream.on('end', function() {
+      assert.deepEqual([ '', '', '', '', '', 'Line 6' ], lines);
       done();
     });
   });

@@ -95,6 +95,10 @@ lineStream.pipe(output);
 
 ```
 
+#Empty Lines
+
+By default byline skips empty lines, if you want to keep them, pass the `keepEmptyLines` option in the call to `byline.createStream(stream, options)` or `byline(stream, options)`.
+
 #Tests
 
     mocha -R spec
