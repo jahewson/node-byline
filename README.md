@@ -60,7 +60,7 @@ stream.on('data', function(line) {
 
 ```javascript
 var stream = fs.createReadStream('sample.txt');
-stream = byline.createLineStream(stream);
+stream = byline.createStream(stream);
 stream.pipe(fs.createWriteStream('nolines.txt'));
 ```
 
@@ -68,7 +68,7 @@ Alternatively, you can create a readable/writable "through-stream" which doesn't
 
 ```javascript
 var stream = fs.createReadStream('sample.txt');
-stream = byline.createLineStream(stream);
+stream = byline.createStream(stream);
 stream.pipe(fs.createWriteStream('nolines.txt'));
 	
 var input = fs.createReadStream('LICENSE');
