@@ -107,5 +107,26 @@ describe('byline', function() {
       done();
     });
   });
+
+  it('should handle encoings like fs', function(done) {
+    areStreamsEqualTypes(null, function() {
+      areStreamsEqualTypes({ encoding: 'utf8' }, function() {
+        done();
+      });
+    });
+  });
+
+  function areStreamsEqualTypes(options, callback) {
+    var fsStream = fs.createReadStream('LICENSE', options);
+    var lineStream = byline(fs.createReadStream('LICENSE', options));
+    fsStream.on('data', function(data1) {
+      lineStream.on('data', function(data2) {
+        assert.equal(Buffer.isBuffer(data1), Buffer.isBuffer(data2));
+      });
+      lineStream.on('end', function() {
+        callback();
+      });
+    });
+  }
   
 });
