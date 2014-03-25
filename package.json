@@ -16,8 +16,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-      "test": "mocha -R spec",
-      "test-cov": "mocha -r blanket -R html-cov > coverage.html"
+    "test": "mocha -R spec",
+    "test-cov": "mocha -r blanket -R html-cov > coverage.html"
   },
   "main": "./lib",
   "devDependencies": {
