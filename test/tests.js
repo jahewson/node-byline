@@ -124,7 +124,15 @@ describe('byline', function() {
     });
   });
 
-  it('should handle encoings like fs', function(done) {
+  describe('when the source stream encoding is set to a deprecated encoding', function () {
+    it('should not throw an exception', function () {
+      assert.doesNotThrow(function () {
+        byline(fs.createReadStream('test/rfc.txt', { encoding: 'utf-8' }));
+      });
+    });
+  });
+
+  it('should handle encodings like fs', function(done) {
     areStreamsEqualTypes(null, function() {
       areStreamsEqualTypes({ encoding: 'utf8' }, function() {
         done();

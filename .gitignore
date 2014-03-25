@@ -1,1 +1,4 @@
 .DS_Store
+.idea
+coverage.html
+node_modules
