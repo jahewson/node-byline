@@ -15,5 +15,22 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "main": "./lib"
+  "scripts": {
+      "test": "mocha -R spec",
+      "test-cov": "mocha -r blanket -R html-cov > coverage.html"
+  },
+  "main": "./lib",
+  "devDependencies": {
+    "mocha": "^1.18.2",
+    "blanket": "^1.1.6"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "lib",
+      "data-cover-never": [
+        "node_modules",
+        "test"
+      ]
+    }
+  }
 }
