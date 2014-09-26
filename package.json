@@ -5,7 +5,7 @@
   "bugs": {
     "url": "https://github.com/piranna/readline-stream/issues"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -15,7 +15,7 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "main": "./lib",
+  "main": "index.js",
   "dependencies": {
     "inherits": "^2.0.1"
   }

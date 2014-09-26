@@ -5,7 +5,8 @@ var Transform = require('stream').Transform;
 var inherits = require('inherits');
 
 
-var splitting_re = /.*?(?:\r\n|\r|\n)|.+?$|^$/g;
+var splitting_re = /.*?(?:\r\n|\r|\n)|.*?$/g;
+//var splitting_re = /.*?(?:\r\n|\r|\n)|.+?$|^$/g;
 
 
 function ReadlineStream(options)
