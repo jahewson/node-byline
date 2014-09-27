@@ -1,19 +1,22 @@
 {
-  "name": "byline",
+  "name": "readline-stream",
   "description": "super-simple line-by-line Stream reader",
-  "homepage": "https://github.com/jahewson/node-byline",
+  "homepage": "https://github.com/piranna/readline-stream",
   "bugs": {
-    "url": "https://github.com/jahewson/node-byline/issues"
+    "url": "https://github.com/piranna/readline-stream/issues"
   },
-  "version": "4.1.1",
-  "author": "John Hewson",
+  "version": "1.0.1",
+  "author": "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jahewson/node-byline"
+    "url": "https://github.com/piranna/readline-stream"
   },
   "engines": {
     "node": ">=0.10.0"
   },
-  "main": "./lib"
+  "main": "index.js",
+  "dependencies": {
+    "inherits": "^2.0.1"
+  }
 }
