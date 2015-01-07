@@ -15,5 +15,11 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "main": "./lib"
+  "main": "./lib",
+  "devDependencies": {
+    "mocha": "~2.1.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  }
 }
