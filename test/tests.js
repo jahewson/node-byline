@@ -89,6 +89,48 @@ describe('byline', function() {
     });
   });
   
+  it('should emit an error if the buffer exceeds maxBuffer', function(done) {
+    var input = fs.createReadStream('test/max-buffer.txt');
+
+    var lineStream = byline(input, { maxBuffer: 1000 });
+    lineStream.setEncoding('utf8');
+
+    lineStream.on('data', function(line) {
+      assert.fail(null, null, 'all data should have been buffered');
+    });
+
+    lineStream.on('error', function(err) {
+      assert.equal(err.message, 'max buffer size exceeded');
+      done();
+    });
+
+    lineStream.on('end', function() {
+      done();
+    });
+  });
+
+  it('should keep lines of any length by default', function(done) {
+    var input = fs.createReadStream('test/max-buffer.txt');
+
+    var lineStream = byline(input);
+    lineStream.setEncoding('utf8');
+
+    var lines1 = [];
+
+    lineStream.on('data', function(line) {
+      lines1.push(line);
+    });
+
+    lineStream.on('end', function() {
+      var lines2 = fs.readFileSync('test/max-buffer.txt', 'utf8').split(/\r\n|\r|\n/g);
+      assert.equal(lines2.length, lines1.length);
+      for (var i = 0; i < lines1.length; ++i) {
+        assert.equal(lines1[i], lines2[i]);
+      }
+      done();
+    });
+  });
+
   it('should pause() and resume()', function(done) {
     var input = fs.createReadStream('LICENSE');
     var lineStream = byline(input);
