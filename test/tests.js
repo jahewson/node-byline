@@ -59,13 +59,22 @@ describe('byline', function() {
       done();
     });
   });
-    
-   it('should read a large file', function(done) {
-    var input = fs.createReadStream('test/rfc.txt');
+   
+  it('should read a large file', function(done) {
+    readFile('test/rfc.txt', done);
+  }); 
+   
+  it('should read a huge file', function(done) {
+    // Readable highWaterMark is 16384, so we test a file with more lines than this
+    readFile('test/rfc_huge.txt', done);
+  });
+  
+  function readFile(filename, done) {
+    var input = fs.createReadStream(filename);
     var lineStream = byline(input);
     lineStream.setEncoding('utf8');
 
-    var lines2 = fs.readFileSync('test/rfc.txt', 'utf8').split(/\r\n|\r|\n/g);
+    var lines2 = fs.readFileSync(filename, 'utf8').split(/\r\n|\r|\n/g);
     lines2 = lines2.filter(function(line) {
       return line.length > 0;
     });
@@ -87,14 +96,14 @@ describe('byline', function() {
       assert.deepEqual(lines2, lines1);
       done();
     });
-  });
-  
-  it('should pause() and resume()', function(done) {
-    var input = fs.createReadStream('LICENSE');
+  }
+
+  it('should pause() and resume() with a huge file', function(done) {
+    var input = fs.createReadStream('test/rfc_huge.txt');
     var lineStream = byline(input);
     lineStream.setEncoding('utf8');
 
-    var lines2 = fs.readFileSync('LICENSE', 'utf8').split(/\r\n|\r|\n/g);
+    var lines2 = fs.readFileSync('test/rfc_huge.txt', 'utf8').split(/\r\n|\r|\n/g);
     lines2 = lines2.filter(function(line) {
       return line.length > 0;
     });
@@ -124,7 +133,7 @@ describe('byline', function() {
     });
   });
 
-  it('should handle encoings like fs', function(done) {
+  it('should handle encodings like fs', function(done) {
     areStreamsEqualTypes(null, function() {
       areStreamsEqualTypes({ encoding: 'utf8' }, function() {
         done();
