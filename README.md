@@ -1,4 +1,4 @@
-# byline — Buffered stream for reading lines
+# byline — buffered stream for reading lines
 
 [![npm package](https://nodei.co/npm/byline.png?downloads=true&downloadRank=true)]
 (https://nodei.co/npm/request/)
