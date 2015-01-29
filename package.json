@@ -21,6 +21,6 @@
     "request": "~2.27.0"
   },
   "scripts": {
-    "test": "mocha -R spec --no-timeouts"
+    "test": "mocha -R spec --timeout 60000"
   }
 }

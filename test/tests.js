@@ -111,6 +111,9 @@ describe('byline', function() {
     var stream = byline(request.get('http://www.google.com'));
     stream.on('data',function (data) {
     });
+    stream.on('end',function () {
+      done();
+    });
   });
 
   it('should pause() and resume() with a huge file', function(done) {
