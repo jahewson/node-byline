@@ -1,7 +1,6 @@
 # byline — buffered stream for reading lines
 
-[![npm package](https://nodei.co/npm/byline.png?downloads=true&downloadRank=true)]
-(https://nodei.co/npm/request/)
+![npm package](https://nodei.co/npm/byline.png?downloads=true&downloadRank=true)
 
 `byline` is a simple module providing a `LineStream`.
 
