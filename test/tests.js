@@ -60,6 +60,22 @@ describe('byline', function() {
       done();
     });
   });
+
+  it('should not split a CRLF which spans two chunks', function(done) {
+    var input = fs.createReadStream('test/CRLF.txt');
+    var lineStream = byline(input, { keepEmptyLines: true });
+    lineStream.setEncoding('utf8');
+
+    var lines = [];
+    lineStream.on('data', function(line) {
+      lines.push(line);
+    });
+
+    lineStream.on('end', function() {
+      assert.equal(2, lines.length);
+      done();
+    });
+  });
    
   it('should read a large file', function(done) {
     readFile('test/rfc.txt', done);
