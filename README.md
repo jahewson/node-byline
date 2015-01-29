@@ -87,14 +87,14 @@ preferred over the legacy pause() and resume() methods.
 
 ```javascript
 var stream = fs.createReadStream('sample.txt');
-    stream = byline.createStream(stream);
+stream = byline.createStream(stream);
 
-    stream.on('readable', function() {
-      var line;
-      while (null !== (line = stream.read())) {
-        console.log(line);
-      }
-    });
+stream.on('readable', function() {
+  var line;
+  while (null !== (line = stream.read())) {
+    console.log(line);
+  }
+});
 ```
 
 #Transform Stream
