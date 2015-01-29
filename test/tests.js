@@ -6,7 +6,8 @@
 
 var assert = require("assert"),
     fs = require('fs'),
-    byline = require('../lib');
+    byline = require('../lib'),
+    request = require('request');
 
 describe('byline', function() {
   
@@ -98,6 +99,20 @@ describe('byline', function() {
     });
   }
 
+  it('should handle encodings like fs', function(done) {
+    areStreamsEqualTypes(null, function() {
+      areStreamsEqualTypes({ encoding: 'utf8' }, function() {
+        done();
+      });
+    });
+  });
+
+  it('should work with old-style streams', function(done) {
+    var stream = byline(request.get('http://www.google.com'));
+    stream.on('data',function (data) {
+    });
+  });
+
   it('should pause() and resume() with a huge file', function(done) {
     var input = fs.createReadStream('test/rfc_huge.txt');
     var lineStream = byline(input);
@@ -130,14 +145,6 @@ describe('byline', function() {
       assert.equal(lines2.length, lines1.length);
       assert.deepEqual(lines2, lines1);
       done();
-    });
-  });
-
-  it('should handle encodings like fs', function(done) {
-    areStreamsEqualTypes(null, function() {
-      areStreamsEqualTypes({ encoding: 'utf8' }, function() {
-        done();
-      });
     });
   });
 
