@@ -1,6 +1,9 @@
-# byline -- buffered Stream for reading lines
+# byline — Buffered stream for reading lines
 
-`byline` is a super-simple module providing a `LineStream` for [node.js](http://nodejs.org/).
+[![npm package](https://nodei.co/npm/byline.png?downloads=true&downloadRank=true)]
+(https://nodei.co/npm/request/)
+
+`byline` is a simple module providing a `LineStream`.
 
 - node v0.10 `streams2` (transform stream)
 - supports `pipe`
@@ -19,7 +22,7 @@ or from source:
     cd node-byline
     npm link
 
-#Convenience API
+# Convenience API
 
 The `byline` module can be used as a function to quickly wrap a readable stream:
 
@@ -38,7 +41,7 @@ stream.on('data', function(line) {
 });
 ```
 
-#Standard API
+# Standard API
     
 You just need to add one line to wrap your readable `Stream` with a `LineStream`.
 
@@ -54,7 +57,7 @@ stream.on('data', function(line) {
 });
 ```
 
-#Piping
+# Piping
 
 `byline` supports `pipe` (though it strips the line endings, of course).
 
@@ -80,7 +83,7 @@ var output = fs.createWriteStream('test.txt');
 lineStream.pipe(output);
 ```
 
-#Streams2 API
+# Streams2 API
     
 Node v0.10 added a new streams2 API. This allows the stream to be used in non-flowing mode and is
 preferred over the legacy pause() and resume() methods.
@@ -97,7 +100,7 @@ stream.on('readable', function() {
 });
 ```
 
-#Transform Stream
+# Transform Stream
 
 The `byline` transform stream can be directly manipulated like so:
 
@@ -113,16 +116,16 @@ lineStream.pipe(output);
 
 ```
 
-#Empty Lines
+# Empty Lines
 
 By default byline skips empty lines, if you want to keep them, pass the `keepEmptyLines` option in
 the call to `byline.createStream(stream, options)` or `byline(stream, options)`.
 
-#Tests
+# Tests
 
     npm test
 
-#v0.8
+# v0.8
 
 If you want to use `node-byline` with node v0.8 then you can use the 2.1.x series. Simply use the
 following in your `package.json`:
@@ -133,7 +136,7 @@ following in your `package.json`:
 },
 ```
 
-#Simple
+# Simple
 Unlike other modules (of which there are many), `byline` contains no:
 
 - monkeypatching

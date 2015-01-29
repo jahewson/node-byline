@@ -1,6 +1,6 @@
 {
   "name": "byline",
-  "description": "super-simple line-by-line Stream reader",
+  "description": "simple line-by-line stream reader",
   "homepage": "https://github.com/jahewson/node-byline",
   "bugs": {
     "url": "https://github.com/jahewson/node-byline/issues"
