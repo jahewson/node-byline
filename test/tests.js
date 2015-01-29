@@ -6,7 +6,7 @@
 
 var assert = require("assert"),
     fs = require('fs'),
-    byline = require('../lib'),
+    byline = require('../lib/byline'),
     request = require('request');
 
 describe('byline', function() {
