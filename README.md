@@ -16,8 +16,8 @@
 or from source:
 
     git clone git://github.com/jahewson/node-byline.git
-	cd node-byline
-	npm link
+    cd node-byline
+    npm link
 
 #Convenience API
 
@@ -64,7 +64,8 @@ stream = byline.createStream(stream);
 stream.pipe(fs.createWriteStream('nolines.txt'));
 ```
 
-Alternatively, you can create a readable/writable "through-stream" which doesn't wrap any specific stream:
+Alternatively, you can create a readable/writable "through-stream" which doesn't wrap any specific
+stream:
 
 ```javascript
 var stream = fs.createReadStream('sample.txt');
@@ -77,6 +78,23 @@ input.pipe(lineStream);
 
 var output = fs.createWriteStream('test.txt');
 lineStream.pipe(output);
+```
+
+#Streams2 API
+    
+Node v0.10 added a new streams2 API. This allows the stream to be used in non-flowing mode and is
+preferred over the legacy pause() and resume() methods.
+
+```javascript
+var stream = fs.createReadStream('sample.txt');
+    stream = byline.createStream(stream);
+
+    stream.on('readable', function() {
+      var line;
+      while (null !== (line = stream.read())) {
+        console.log(line);
+      }
+    });
 ```
 
 #Transform Stream
@@ -97,7 +115,8 @@ lineStream.pipe(output);
 
 #Empty Lines
 
-By default byline skips empty lines, if you want to keep them, pass the `keepEmptyLines` option in the call to `byline.createStream(stream, options)` or `byline(stream, options)`.
+By default byline skips empty lines, if you want to keep them, pass the `keepEmptyLines` option in
+the call to `byline.createStream(stream, options)` or `byline(stream, options)`.
 
 #Tests
 
@@ -105,7 +124,8 @@ By default byline skips empty lines, if you want to keep them, pass the `keepEmp
 
 #v0.8
 
-If you want to use `node-byline` with node v0.8 then you can use the 2.1.x series. Simply use the following in your `package.json`:
+If you want to use `node-byline` with node v0.8 then you can use the 2.1.x series. Simply use the
+following in your `package.json`:
 
 ```javascript
   "dependencies": {
@@ -121,4 +141,4 @@ Unlike other modules (of which there are many), `byline` contains no:
 - non-standard 'line' events which break `pipe`
 - limitations to only file streams
 - CoffeeScript
-- mostly unnecessary code
+- unnecessary code

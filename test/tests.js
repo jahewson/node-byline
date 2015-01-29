@@ -24,6 +24,21 @@ describe('byline', function() {
       done();
     });
   });
+
+  it('should work with streams2 API', function(done) {
+    var stream = fs.createReadStream('LICENSE');
+    stream = byline.createStream(stream);
+
+    stream.on('readable', function() {
+      var line;
+      while (null !== (line = stream.read())) {
+      }
+    });
+
+    stream.on('end', function() {
+      done();
+    });
+  });
   
   it('should ignore empty lines by default', function(done) {
     var input = fs.createReadStream('test/empty.txt');
