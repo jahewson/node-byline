@@ -145,7 +145,7 @@ describe('byline', function() {
   }
 
   it('should handle encodings like fs', function(done) {
-    areStreamsEqualTypes(null, function() {
+    areStreamsEqualTypes({}, function() {
       areStreamsEqualTypes({ encoding: 'utf8' }, function() {
         done();
       });
@@ -208,5 +208,20 @@ describe('byline', function() {
       });
     });
   }
-  
+
+  it('should separate by any regexp when separator is specified', function(done) {
+    var input = fs.createReadStream('test/separator.txt');
+    var lineStream = byline(input, { separator: /X/g, keepEmptyLines: true });
+    lineStream.setEncoding('utf8');
+    
+    var lines = [];
+    lineStream.on('data', function(line) {
+      lines.push(line);
+    });
+    
+    lineStream.on('end', function() {
+      assert.deepEqual([ 'a', 'aa', '\naa\n', '\n', 'aa', '\n'], lines);
+      done();
+    });
+  });
 });
