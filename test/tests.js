@@ -145,7 +145,7 @@ describe('byline', function() {
   }
 
   it('should handle encodings like fs', function(done) {
-    areStreamsEqualTypes(null, function() {
+    areStreamsEqualTypes(undefined, function() {
       areStreamsEqualTypes({ encoding: 'utf8' }, function() {
         done();
       });
