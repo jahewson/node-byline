@@ -16,9 +16,9 @@
     "node": ">=0.10.0"
   },
   "main": "./lib/byline.js",
-  "files": {
+  "files": [
     "lib"
-  },
+  ],
   "devDependencies": {
     "mocha": "~2.1.0",
     "request": "~2.27.0"
