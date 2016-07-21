@@ -65,7 +65,7 @@ describe('byline', function() {
     });
     
     lineStream.on('end', function() {
-      var lines2 = fs.readFileSync('test/empty.txt', 'utf8').split(/\r\n|\r|\n/g);
+      var lines2 = fs.readFileSync('test/empty.txt', 'utf8').split(/\r\n|[\n\v\f\r\x85\u2028\u2029]/g);
       lines2 = lines2.filter(function(line) {
         return line.length > 0;
       });
@@ -120,7 +120,7 @@ describe('byline', function() {
     var lineStream = byline(input);
     lineStream.setEncoding('utf8');
 
-    var lines2 = fs.readFileSync(filename, 'utf8').split(/\r\n|\r|\n/g);
+    var lines2 = fs.readFileSync(filename, 'utf8').split(/\r\n|[\n\v\f\r\x85\u2028\u2029]/g);
     lines2 = lines2.filter(function(line) {
       return line.length > 0;
     });
@@ -166,7 +166,7 @@ describe('byline', function() {
     var lineStream = byline(input);
     lineStream.setEncoding('utf8');
 
-    var lines2 = fs.readFileSync('test/rfc_huge.txt', 'utf8').split(/\r\n|\r|\n/g);
+    var lines2 = fs.readFileSync('test/rfc_huge.txt', 'utf8').split(/\r\n|[\n\v\f\r\x85\u2028\u2029]/g);
     lines2 = lines2.filter(function(line) {
       return line.length > 0;
     });
