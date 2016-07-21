@@ -7,6 +7,7 @@
 - node v0.10 `streams2` (transform stream)
 - supports `pipe`
 - supports both UNIX and Windows line endings
+- supports [Unicode UTS #18 line boundaries](http://www.unicode.org/reports/tr18/#Line_Boundaries)
 - can wrap any readable stream
 - can be used as a readable-writable "through-stream" (transform stream)
 - super-simple: `stream = byline(stream);`
