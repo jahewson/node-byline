@@ -117,6 +117,27 @@ describe('byline', function() {
     readFile('test/rfc_huge.txt', done);
   });
   
+  it('should not break multibyte unicode characters spanning chunks', function(done) {
+    var direct = fs.readFileSync('test/unicode.txt', 'utf8').split('\n')
+    var input = fs.createReadStream('test/unicode.txt');
+    var lineStream = byline(input, { keepEmptyLines: true });
+    lineStream.setEncoding('utf8');
+
+    var lines = [];
+    lineStream.on('data', function(line) {
+      lines.push(line);
+    });
+
+    lineStream.on('end', function() {
+      assert.equal(direct.length, lines.length);
+      lines.forEach((line, i) => {
+        var other = direct[i];
+        assert.equal(other, line)
+      })
+      done();
+    });
+  });
+
   function readFile(filename, done) {
     var input = fs.createReadStream(filename);
     var lineStream = byline(input);
