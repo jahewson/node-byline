@@ -116,6 +116,32 @@ lineStream.pipe(output);
 
 ```
 
+# Line Endings
+
+By default, byline matches end of line according to the following regular expression:
+
+```regexp
+/\r\n|[\n\v\f\r\x85\u2028\u2029]/g
+```
+
+You can override this default and specify your own regular expression for matching end of line for
+your data. 
+
+```javascript
+var stream = fs.createReadStream('sample.txt');
+stream = byline.createStream(stream,{newLines: /\n/g});
+
+// ...
+```
+
+or
+
+```javascript
+var stream = byline(fs.createReadStream('sample.txt', { encoding: 'utf8' }),{newLines: /\n/g});
+
+// ...
+```
+
 # Empty Lines
 
 By default byline skips empty lines, if you want to keep them, pass the `keepEmptyLines` option in

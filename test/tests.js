@@ -92,6 +92,22 @@ describe('byline', function() {
     });
   });
 
+  it('should match given newline separators using newLine option', function(done) {
+    var input = fs.createReadStream('test/rfc-DOS.txt');
+    var lineStream = byline(input, { keepEmptyLines: true, newLines: /\r\n/g });
+    lineStream.setEncoding('utf8');
+
+    var lines = [];
+    lineStream.on('data', function(line) {
+      lines.push(line);
+    });
+
+    lineStream.on('end', function() {
+      assert.equal(9859, lines.length);
+      done();
+    });
+  });
+
   it('should not split a CRLF which spans two chunks', function(done) {
     var input = fs.createReadStream('test/CRLF.txt');
     var lineStream = byline(input, { keepEmptyLines: true });
